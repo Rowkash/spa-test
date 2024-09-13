@@ -33,6 +33,7 @@ REDIS_HOST=redis # for docker
 REDIS_PORT=6379
 
 JWT_SECRET=kardashian
+RECAPTCHA_KEY_SERVICE=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
 ```
 
 Also you can rename file " env-example " in main project folder 
