@@ -12,6 +12,8 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { RedisClientOptions } from 'redis';
 import { AuthMiddleware } from './middleware/auth.middleware';
 import { JwtModule } from '@nestjs/jwt';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import * as path from 'path';
 
 @Module({
   imports: [
@@ -20,7 +22,11 @@ import { JwtModule } from '@nestjs/jwt';
       envFilePath: '.env',
     }),
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
-    CacheModule.registerAsync<RedisClientOptions>(CacheConfigModule),
+		CacheModule.registerAsync<RedisClientOptions>(CacheConfigModule),
+		ServeStaticModule.forRoot({
+			rootPath: path.resolve('static'),
+			serveRoot: '/static'
+    }),
     UsersModule,
     AuthModule,
     RolesModule,
