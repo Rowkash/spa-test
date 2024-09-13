@@ -1,0 +1,6 @@
+ssh 20.185.233.17
+sudo lsof -i :3000 - check process on port 3000
+kill -9 <id> - kill process by id
+
+docker run -d --name postgres-container -p 5432:5432 -e POSTGRES_PASSWORD=ваш_пароль postgres:latest
+config docker with port
