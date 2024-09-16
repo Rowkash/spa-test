@@ -10,7 +10,8 @@ RUN pnpm install
 
 COPY . .
 
-RUN chown -R node:node /app
+# RUN chown -R node:node /app
 RUN pnpm build
+RUN pnpm prune --production
 
 CMD [ "node", "./dist/main.js" ]
