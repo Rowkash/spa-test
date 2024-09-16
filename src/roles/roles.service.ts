@@ -18,9 +18,10 @@ export class RolesService {
 
   // ---------- Create role ---------- //
 
-  async create(dto: CreateRoleDto) {
-    const role = await this.findOneByTitle(dto.title);
-    if (!role) this.rolesRepository.save(dto);
+	async create(dto: CreateRoleDto) {
+		const role = await this.rolesRepository.findOneBy({ title: dto.title });
+		if(role) throw new BadRequestException("Role title already exists")
+    return await this.rolesRepository.save(dto);
   }
 
   // ---------- Find all roles ---------- //
