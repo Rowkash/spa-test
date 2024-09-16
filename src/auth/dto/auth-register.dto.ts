@@ -6,13 +6,7 @@ export class AuthRegisterDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(2)
-  firstName: string;
-
-  @ApiProperty({ example: 'Jack' })
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(2)
-  lastName: string;
+  userName: string;
 
   @ApiProperty({ example: 'test1@example.com' })
   @IsNotEmpty()

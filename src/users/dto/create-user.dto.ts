@@ -5,12 +5,7 @@ export class CreateUserDto {
   @ApiProperty({ example: 'Jack' })
   @IsString()
   @IsNotEmpty()
-  firstName: string;
-
-  @ApiProperty({ example: 'Jack' })
-  @IsString()
-  @IsNotEmpty()
-  lastName: string;
+  userName: string;
 
   @ApiProperty({ example: 'test1@example.com' })
   @IsNotEmpty()
