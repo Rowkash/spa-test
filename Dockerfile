@@ -6,13 +6,11 @@ COPY package*.json ./
 COPY pnpm-lock.yaml ./
 
 RUN npm install -g pnpm
-
 RUN pnpm install
 
 COPY . .
 
-# COPY ./dist ./dist
-
 RUN chown -R node:node /app
+RUN pnpm build
 
-CMD [ "pnpm", "dev" ]
+CMD [ "node", "./dist/main.js" ]

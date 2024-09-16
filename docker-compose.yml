@@ -10,12 +10,14 @@ services:
     env_file:
       - .env
 
-  adminer:
-    container_name: admin-panel
-    image: adminer
+  redis:
+    container_name: redis
+    image: redis:latest
     restart: always
     ports:
-      - 5000:8080
+      - 6379:6379
+    env_file:
+      - .env
 
   api:
     container_name: api
@@ -27,16 +29,8 @@ services:
       - .:/app
     ports:
       - 3000:3000
-    command: pnpm migrate-and-dev
+    # command: pnpm migration:run
     depends_on:
       - db
+      - redis
     restart: always
-
-  redis:
-    container_name: redis
-    image: redis:latest
-    restart: always
-    ports:
-      - 6379:6379
-    env_file:
-      - .env
