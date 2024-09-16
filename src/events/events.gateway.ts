@@ -4,6 +4,7 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
+import { CreateCommentDto } from 'src/comments/dto/create-comment.dto';
 import { CommentEntity } from 'src/comments/entities/comment.entity';
 
 @WebSocketGateway({
@@ -30,7 +31,7 @@ export class EventsGateway {
 
 	  // ---------- Add message to Chat ---------- //
 	
-	sendComment(comment: CommentEntity) {
+	sendComment(comment: CreateCommentDto) {
 		this.server.emit('comments', comment);
 	}
 }

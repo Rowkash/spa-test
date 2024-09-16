@@ -21,7 +21,7 @@ export class CommentsService {
 	async create(dto: CreateCommentDto, authorId: number) {
     const user = { id: authorId };
     await checkRecaptcha(dto.recaptcha);
-		checkHtmlTags(dto.value);
+		await checkHtmlTags(dto.value);
 		if (dto.parentId) {
 		}
     const comment = new CommentEntity();
@@ -34,7 +34,8 @@ export class CommentsService {
 			const findComment =  await this.commentRepository.findOneBy({id: +dto.parentId})
 			if(findComment) comment.parent = findComment
 		}
-    return await this.commentRepository.save({ ...comment, user });
+		await this.commentRepository.save({ ...comment, user });
+		return {...dto, user}
   }
 
 	// =============== Get many comments =============== //
