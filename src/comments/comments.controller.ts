@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
-import { ApiConsumes, ApiOperation } from '@nestjs/swagger';
+import { ApiConsumes, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Request } from 'express';
 import { FileValidationPipe } from 'src/pipes/file.validation.pipe';
@@ -29,6 +29,7 @@ interface IRequest extends Request {
   };
 }
 
+@ApiTags("Comments")
 @Controller('comments')
 export class CommentsController {
 	constructor(
@@ -38,7 +39,7 @@ export class CommentsController {
 
 	// =============== Create comment =============== //
 
-	@ApiOperation({ summary: 'Create Article' })
+	@ApiOperation({ summary: 'Create Comment' })
 	@ApiConsumes('multipart/form-data')
 	@UseGuards(AuthGuard)
 	@UseInterceptors(FileInterceptor('file'))
@@ -57,8 +58,9 @@ export class CommentsController {
 
 	// =============== Get many comments =============== //
 
-	@ApiOperation({ summary: 'Get many comments' })
+	@ApiOperation({ summary: 'Get many comments', description: "sortBy (createdAt, userName), orderBy (ASC, DESC), limit, page" })
 	@Get()
+	@ApiOkResponse({ type: [CommentEntity] })
   findAll(
     @Query(
       new ValidationPipe({
@@ -73,7 +75,8 @@ export class CommentsController {
 
 	// =============== Get one comment =============== //
 
-  @Get(':id')
+	@Get(':id')
+	@ApiOkResponse({ type: CommentEntity })
   findOne(@Param('id') id: string) {
     return this.commentsService.findOne(+id);
   }

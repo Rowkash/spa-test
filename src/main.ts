@@ -22,8 +22,7 @@ async function bootstrap() {
   // ---------- Swagger config ---------- //
 
   const options = new DocumentBuilder()
-    .setTitle('Coursegarden')
-    .setDescription('Application for create and use courses')
+    .setTitle('dzen-test')
     .setVersion('0.1')
     .addBearerAuth()
     .build();

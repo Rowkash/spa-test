@@ -44,6 +44,7 @@ export class UserEntity {
   @JoinColumn()
 	role: RoleEntity;
 	
+	@ApiProperty({ type: [CommentEntity] })
 	@OneToMany(() => CommentEntity, (comment) => comment.id)
 	comments: CommentEntity[]
 

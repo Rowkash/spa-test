@@ -22,6 +22,7 @@ export class CreateCommentDto {
   @IsOptional()
 	file: Express.Multer.File;
 
+	@ApiProperty({ type: 'string', required: true })
   @IsNotEmpty()
 	recaptcha: any
 }
